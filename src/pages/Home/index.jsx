@@ -13,12 +13,12 @@ function Home() {
                 Project Week 6
             </h1>
             <div className="mt-10 list-project w-full grid gap-6">
-                <Link to={"/form"}>
+                <Link to={"/register"}>
                     <div className="item text-center w-full pt-16 pb-16 bg-white hover:shadow-lg rounded-lg">
                         <h3 className="text-2xl">Form Register</h3>
                     </div>
                 </Link>
-                <Link to={"/users"}>
+                <Link to={"/search"}>
                     <div className="item text-center w-full pt-16 pb-16 bg-white hover:shadow-lg rounded-lg">
                         <h3 className="text-2xl">Search Filter</h3>
                     </div>
