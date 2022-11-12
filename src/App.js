@@ -7,7 +7,6 @@ function App() {
   return (
     <Routes>
       {publicRoutes.map((route, index) => {
-          const Page = route.element;
 
 
           return (
@@ -15,7 +14,7 @@ function App() {
               path={route.path}
               key={route.id}
               element={
-                  <Page />
+                route.element
               }
             />
           );

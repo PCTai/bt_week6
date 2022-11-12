@@ -1,8 +1,4 @@
-import { Link, Route, Routes } from "react-router-dom";
-import Filter from "../Filter";
-import Form from "../Form";
-import NotFound from "../NotFound";
-import Quiz from "../Quiz";
+import { Link  } from "react-router-dom";
 import './style.css'
 
 function Home() {
