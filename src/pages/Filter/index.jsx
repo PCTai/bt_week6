@@ -1,46 +1,76 @@
 
 import './style.css';
 import {users} from '../../constants/users'
-import { useRef, useState } from 'react';
+import {  useRef, useState } from 'react';
 
 function Filter() {
-
-    const [listUser, setListUser] = useState(users);
+    const sorter2 = (sortBy) => (a, b) =>{
+        if(sortBy==='age'){
+            return a[sortBy] < b[sortBy] ? 1 : -1;
+        }
+        return a[sortBy].toLowerCase() > b[sortBy].toLowerCase() ? 1 : -1;
+    }
+    const [order, setOrder] = useState('name');
+    const [listUser, setListUser] = useState(users.sort(sorter2(order)));
     const inputRef= useRef();
+    
     const handleClick =() =>{
         
         if(inputRef.current.value){
-            const newlist= listUser.filter((item) =>{
-                return item.name.toLowerCase() !== inputRef.current.value.toLowerCase();
+            const newlist= users.filter((item) =>{
+                return item.name.toLowerCase().includes(inputRef.current.value.toLowerCase());
             })
             setListUser(newlist);
+            inputRef.current.value= '';
+            inputRef.current.focus();
         }
+        else{
+            setListUser(users);
+        }
+    }
+    const handleEnter =(e) =>{
+        
+        if (e.keyCode === 13) {
+            handleClick();
+        }
+    }
+    const handleSetOrder =(e) =>{
+        setOrder(e.target.value);
+        setListUser(listUser.sort(sorter2(e.target.value)))
+       
     }
 
     return ( 
-        <div className="filter container pl-6 pr-6 pt-20  m-auto grid gap-10">
+        <div className="filter container pl-6 pr-6 pt-28  m-auto grid gap-10">
             <div className="nav-left">
                 <h3 className="text-3xl font-bold text-blue-900 ">Search Filter</h3>
                 <div className="search mt-6 w-full flex">
-                    <input ref={inputRef} type='text' className=" form-input rounded text-pink-500 p-1 flex-1 outline-none "/>
+                    <input onKeyDown={handleEnter} ref={inputRef} type='text' className=" form-input rounded text-pink-500 p-1 flex-1 outline-none "/>
                     <button onClick={handleClick} className='p-4 ml-2 bg-blue-900 text-white rounded hover:shadow-blue-900 shadow'>Search</button>
                 </div>
+                <h3 className="text-xl text-left font-bold text-blue-900 mt-4">Order</h3>
+                <select onChange={handleSetOrder} className='outline-none max-w-xs w-full mt-4 p-4' name="propoty" id="user">
+                    <option className='block p-4' value="name">Name</option>
+                    <option className='block p-4' value="age">Age</option>
+                </select>
             </div>
             <div className="user-main">
-                <h3 className="text-2xl text-left"> List User</h3>
-                <div className="list-user">
+                <h3 className="text-2xl text-left font-bold text-blue-900"> List User</h3>
+                <div className="list-user mt-6">
                 <table className="table-auto w-full border-collapse border border-slate-500 ">
                     <thead>
                         <tr>
-                            <th className='border border-slate-600'>Stt</th>
-                            <th className='border border-slate-600'>Name</th>
+                            <th className='border pt-4 pb-4 text-xl border-slate-600'>Stt</th>
+                            <th className='border pt-4 pb-4 text-xl border-slate-600'>Name</th>
+                            <th className='border pt-4 pb-4 text-xl border-slate-600'>Age</th>
                         </tr>
                     </thead>
                     <tbody>
                         {listUser.map(item =>(
                             <tr key={item.id}>
-                                <td className='border border-slate-600'>{item.id}</td>
-                                <td className='border border-slate-600 '>{item.name}</td>
+                                <td className='border pt-4 pb-4 pl-2 text-xl border-slate-600'>{item.id}</td>
+                                <td className='border pt-4 pb-4 text-xl text-center border-slate-600 '>{item.name}</td>
+                                <td className={`border pt-4 pb-4 text-xl text-center border-slate-600 ${item.age>=18?'text-green-500':'text-red-500'}`}>{item.age}</td>
                             </tr >
                         )) }
                     </tbody>
