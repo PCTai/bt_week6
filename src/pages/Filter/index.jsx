@@ -45,7 +45,11 @@ function Filter() {
             <div className="nav-left">
                 <h3 className="text-3xl font-bold text-blue-900 ">Search Filter</h3>
                 <div className="search mt-6 w-full flex">
-                    <input onKeyDown={handleEnter} ref={inputRef} type='text' className=" form-input rounded text-pink-500 p-1 flex-1 outline-none "/>
+                    <input onKeyDown={handleEnter} 
+                    ref={inputRef} type='text' 
+                    className=" form-input rounded text-pink-500 p-1 flex-1 outline-none pl-4"
+                    placeholder='Enter key'
+                    />
                     <button onClick={handleClick} className='p-4 ml-2 bg-blue-900 text-white rounded hover:shadow-blue-900 shadow'>Search</button>
                 </div>
                 <h3 className="text-xl text-left font-bold text-blue-900 mt-4">Order</h3>
