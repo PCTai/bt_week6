@@ -66,9 +66,9 @@ function Filter() {
                         </tr>
                     </thead>
                     <tbody>
-                        {listUser.map(item =>(
+                        {listUser.map((item,index) =>(
                             <tr key={item.id}>
-                                <td className='border pt-4 pb-4 pl-2 text-xl border-slate-600'>{item.id}</td>
+                                <td className='border pt-4 pb-4 pl-2 text-xl border-slate-600'>{index+1}</td>
                                 <td className='border pt-4 pb-4 text-xl text-center border-slate-600 '>{item.name}</td>
                                 <td className={`border pt-4 pb-4 text-xl text-center border-slate-600 ${item.age>=18?'text-green-500':'text-red-500'}`}>{item.age}</td>
                             </tr >

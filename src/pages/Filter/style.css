@@ -13,5 +13,8 @@
     .filter{
         grid-template-columns: 1fr;
     }
+    .user-main{
+        margin-bottom: 120px;
+    }
     
 }
