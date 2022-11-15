@@ -5,7 +5,7 @@ export const questions =[
         id: 1,
         question: '1 + 1',
         list: [1,4,2,3],
-        answer: 3,
+        answer: 2,
     },
     {
         id: 2,
