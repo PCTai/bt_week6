@@ -90,7 +90,7 @@ function Quiz() {
                     <h3 className="text-xl font-bold mb-6">Question {index}: {questions[index-1].question} ?</h3>
                     {answers.map((item,index) =>(
                         <div onClick={()=>handleChooseAnswer(item,index)} key={item} 
-                        className={`itemAnswer p-2 bg-white mb-4 cursor-pointer ${active===index+1? "bg-gray-200": ''}`}>{item}</div>
+                        className={`itemAnswer p-2 bg-white mb-4 cursor-pointer hover:bg-gray-300 ${active===index+1? "bg-gray-300": ''}`}>{item}</div>
                     ))}
                 </div>
                 <div className="quiz-right pl-8 ">
