@@ -33,7 +33,11 @@ function Form() {
         setErrorEmail('');
       }
       else{
-        setErrorEmail('You have entered an invalid email address!');
+        if(email===''){
+          setErrorEmail('This field cannot be empty');
+        }else{
+          setErrorEmail('You have entered an invalid email address!');
+        }
       }
       
     }
