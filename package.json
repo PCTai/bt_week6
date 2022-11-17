@@ -1,7 +1,7 @@
 {
   "name": "bt_week6",
   "version": "0.1.0",
-  "homepage": "https://gitname.github.io/bt_week6",
+  "homepage": "https://gitname.github.io/bt_week6/#",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
