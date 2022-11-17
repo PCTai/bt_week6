@@ -1,0 +1,20 @@
+.toast{
+    animation: faceIn 0.4s, faceOut 1s 3s forwards ;
+}
+
+@keyframes faceIn {
+    from{
+        transform: translate(calc(100% + 24px));
+    }
+    to{
+        transform: translate(0);
+    }
+}
+@keyframes faceOut {
+    from{
+        opacity: 1;
+    }
+    to{
+        opacity: 0;
+    }
+}

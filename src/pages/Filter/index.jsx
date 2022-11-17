@@ -14,7 +14,7 @@ function Filter() {
         }
         else{
            if(sort==='desc'){
-            console.log('desc');
+            // console.log('desc');
             if(sortBy==='age'){
 
                 return a[sortBy] < b[sortBy] ? 1 : -1;

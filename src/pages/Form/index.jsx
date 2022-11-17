@@ -1,17 +1,20 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import './style.css'
 
 function Form() {
   const [userName, setUserName] = useState('');
   const [email, setEmail] = useState('');
   const [errorUserName, setErrorUserName] = useState('');
   const [errorEmail, setErrorEmail] = useState('');
-  const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState('');
+  const [openToast, setOpenToast] = useState(false);
 
-  function validateEmail(email) {
-    var re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(email);
-  }
+  const validateEmail = (email) => {
+    return email.match(
+      /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    );
+  };
   const checkValueInput =(value) =>{
     if(value==='' || value===null){
       return 'This field cannot be empty';
@@ -35,34 +38,38 @@ function Form() {
       
     }
   }
+  const showMessage =()=>{
+    setOpenToast(true);
+        setTimeout(()=>{
+        setOpenToast(false)
+    },4000)
+  }
   const handleSubmit = (e) =>{
     e.preventDefault();
     if(userName===''){
       setErrorUserName(checkValueInput(''));
     }
-    else if(email === ''){
-      setErrorEmail('You have entered an invalid email address!')
+    if(email === ''){
+      setErrorEmail('This field cannot be empty')
     }
     else{
       if(errorEmail==='' && errorUserName===''){
-        // console.log('Đăng ký thành công');
-        setOpen(!open);
+        setMessage('You have successfully registered');
+        showMessage('success');  
       }
     }
   }
-  // console.log(open);
+  // console.log(openToast);
   return (
-    <div className="register container m-auto  text-blue-900 font-bold ">
-      {open && 
-      <div
-        
-       className="model fixed top-0 left-0 right-0 bottom-0 z-10 flex justify-center items-center">
-          <div className="model-container w-96 h-80 flex justify-center flex-col items-center bg-white shadow-md">
-            <h3 className="text-2xl">You have successfully registered</h3>
-            <button onClick={() =>setOpen(false)} className="mt-8 pl-10 pr-10 bg-blue-900 text-white pt-4 pb-4 rounded-xl">OK</button>
-          </div>
-      </div>}
-      <form method="get" action="" className="mt-28 p-10 bg-white max-w-lg m-auto shadow">
+    
+    <div className="h-screen register container m-auto  text-blue-900 font-bold  flex items-center justify-center">
+      <div id="toast">
+      {openToast && <div className="toast text-green-500 fixed top-6 right-6  z-10 border-l-4 bg-white p-5 border-green-500">
+        {message}
+        </div>}
+      </div>
+      
+      <form method="get" action="" className=" w-full p-10 bg-white max-w-sm m-auto shadow">
         <Link to='/' className=" block">{'<-'}Back home</Link>
 
         <h3 className="text-3xl pb-10">Register</h3>
