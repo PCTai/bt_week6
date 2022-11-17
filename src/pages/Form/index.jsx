@@ -83,7 +83,7 @@ function Form() {
           </label>
           <div className="relative mt-2 ">
             <input
-              onChange={(e) =>setUserName(e.target.value)}
+              onChange={(e) =>setUserName(e.target.value.trim())}
               type="text"
               name="username"
               id="username"
@@ -100,7 +100,7 @@ function Form() {
           </label>
           <div className="relative mt-2 ">
             <input
-              onChange={(e) =>setEmail(e.target.value)}
+              onChange={(e) =>setEmail(e.target.value.trim())}
               type="email"
               name="email"
               id="email"

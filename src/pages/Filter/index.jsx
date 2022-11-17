@@ -30,10 +30,10 @@ function Filter() {
     const inputRef= useRef();
     
     const handleSearchClick =() =>{
-        
-        if(inputRef.current.value){
+        const key=inputRef.current.value.trim();
+        if(key){
             const newlist= users.filter((item) =>{
-                return item.name.toLowerCase().includes(inputRef.current.value.toLowerCase());
+                return item.name.toLowerCase().includes(key.toLowerCase());
             })
             setListUser(newlist);
             inputRef.current.value= '';
@@ -41,6 +41,8 @@ function Filter() {
         }
         else{
             setListUser(users);
+            inputRef.current.value= '';
+            inputRef.current.focus();
         }
     }
     const handleEnter =(e) =>{
@@ -88,26 +90,28 @@ function Filter() {
             </div>
             <div className="user-main">
                 <h3 className="text-2xl text-left font-bold text-blue-900"> List User</h3>
-                <div className="list-user mt-6">
-                <table className="table-auto w-full border-collapse border border-slate-500 ">
-                    <thead>
-                        <tr>
-                            <th className='border pt-4 pb-4 text-xl border-slate-600'>Stt</th>
-                            <th className='border pt-4 pb-4 text-xl border-slate-600'>Name</th>
-                            <th className='border pt-4 pb-4 text-xl border-slate-600'>Age</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {listUser.map((item,index) =>(
-                            <tr key={item.id}>
-                                <td className='border pt-4 pb-4 pl-2 text-xl border-slate-600'>{index+1}</td>
-                                <td className='border pt-4 pb-4 text-xl text-center border-slate-600 '>{item.name}</td>
-                                <td className={`border pt-4 pb-4 text-xl text-center border-slate-600 ${item.age>=18?'text-green-500':'text-red-500'}`}>{item.age}</td>
-                            </tr >
-                        )) }
-                    </tbody>
-                </table>
-                </div>
+                {listUser.length>0? 
+                    (<div className="list-user mt-6">
+                    <table className="table-auto w-full border-collapse border border-slate-500 ">
+                        <thead>
+                            <tr>
+                                <th className='border pt-4 pb-4 text-xl border-slate-600'>Stt</th>
+                                <th className='border pt-4 pb-4 text-xl border-slate-600'>Name</th>
+                                <th className='border pt-4 pb-4 text-xl border-slate-600'>Age</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {listUser.map((item,index) =>(
+                                <tr key={item.id}>
+                                    <td className='border pt-4 pb-4 pl-2 text-xl border-slate-600'>{index+1}</td>
+                                    <td className='border pt-4 pb-4 text-xl text-center border-slate-600 '>{item.name}</td>
+                                    <td className={`border pt-4 pb-4 text-xl text-center border-slate-600 ${item.age>=18?'text-green-500':'text-red-500'}`}>{item.age}</td>
+                                </tr >
+                            )) }
+                        </tbody>
+                    </table>
+                    </div>): <h3 className="text-xl text-left font-bold ">No users were found matching the key</h3>
+                }
             </div>
         </div>
      );
